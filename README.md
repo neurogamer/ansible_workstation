@@ -1,2 +1,2 @@
 # ansible_workstation
-tools of the trade
+Deploy necessary tools for a complete workstation.
