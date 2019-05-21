@@ -1,0 +1,8 @@
+---
+# This role will install, update and uninstall applications based on a list passed in
+- name: install packages
+  yum:
+    name: "{{ packages }}"
+    state: "{{ package_state }}"
+  vars:
+    packages: []
