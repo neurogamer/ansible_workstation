@@ -4,9 +4,6 @@
     become: True
 
 tasks:
-    - name: Enable Flathub repository
-      become: Yes
-      command: flatpak remote-add --if-not-exists flathub 
  
      - name: create /deployment folder
        file:
