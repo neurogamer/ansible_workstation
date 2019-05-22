@@ -8,7 +8,15 @@ tasks:
       become: Yes
       command: flatpak remote-add --if-not-exists flathub 
  
-    - include_role:
+     - name: create /deployment folder
+       file:
+         path: /deployment
+         owner: remus
+         group: remus
+         state: directory
+         mode: 0777
+
+     - include_role:
          name: linux_package
        vars:
          packages:
@@ -27,33 +35,7 @@ tasks:
            - ncurses-devel
            - git-core
            - lynx
-
-     - name: create /deployment folder
-       file:
-         path: /deployment
-         owner: remus
-         group: remus
-         state: directory
-         mode: 0777
-
-     - name: Make sure we have a 'wheel' group
-       group:
-         name: wheel
-         state: present
-
-     - name: Allow 'wheel' group to have passwordless sudo
-       lineinfile:
-         dest: /etc/sudoers
-         state: present
-         regexp: '^%wheel'
-         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-
-     - name: Add sudoers users to wheel group
-       user:
-         name: "{{ workstation_user }}"
-         groups: wheel
-         append: yes
-         state: present
-         createhome: yes
-
-
+   
+    - name: Apply Midnight Commander settings 
+      src: /custom_config/ini 
+      dest: ~/.config/mc/ini
