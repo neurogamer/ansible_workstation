@@ -1,0 +1,59 @@
+---
+
+- hosts: localhost
+    become: True
+
+tasks:
+    - name: Enable Flathub repository
+      become: Yes
+      command: flatpak remote-add --if-not-exists flathub 
+ 
+    - include_role:
+         name: linux_package
+       vars:
+         packages:
+           - git
+           - python-pip
+           - gcc
+           - libffi-devel
+           - python-devel
+           - openssl-devel
+           - vim
+           - wget
+           - python-virtualenv
+           - mc
+           - tmux
+           - htop
+           - ncurses-devel
+           - git-core
+           - lynx
+
+     - name: create /deployment folder
+       file:
+         path: /deployment
+         owner: remus
+         group: remus
+         state: directory
+         mode: 0777
+
+     - name: Make sure we have a 'wheel' group
+       group:
+         name: wheel
+         state: present
+
+     - name: Allow 'wheel' group to have passwordless sudo
+       lineinfile:
+         dest: /etc/sudoers
+         state: present
+         regexp: '^%wheel'
+         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
+     - name: Add sudoers users to wheel group
+       user:
+         name: "{{ workstation_user }}"
+         groups: wheel
+         append: yes
+         state: present
+         createhome: yes
+
+
