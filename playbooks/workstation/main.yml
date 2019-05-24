@@ -5,14 +5,6 @@
 
 tasks:
  
-     - name: create /deployment folder
-       file:
-         path: /deployment
-         owner: remus
-         group: remus
-         state: directory
-         mode: 0777
-
      - include_role:
          name: linux_package
        vars:
@@ -34,5 +26,15 @@ tasks:
            - lynx
    
     - name: Apply Midnight Commander settings 
-      src: /custom_config/ini 
-      dest: ~/.config/mc/ini
+      template:
+        src: /custom_config/ini.j2 
+        dest: ~/.config/mc/ini
+
+    - name: Install Vim from source:
+        shell: cd .. && git clone git@github.com:vim/vim.git && ./configure --prefix=/usr --with-features=huge --enable-multibyte --with-python-config-dir=/usr/lib/python2.7/config --enable-pythoninterp=yes && cd vim && make install
+
+    - name: Install VimAwesome
+        shell: cd .. && git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime && sh ~/.vim_runtime/install_awesome_vimrc.sh
+
+
+
