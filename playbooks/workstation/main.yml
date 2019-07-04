@@ -23,7 +23,6 @@
            - git-core
            - lynx
            - zsh
-           - emacs
     - name: mc-settings 
       template:
        src: ~/deployment/tools_of_the_trade/custom_config/ini.j2 
