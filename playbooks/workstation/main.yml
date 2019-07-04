@@ -24,17 +24,26 @@ tasks:
            - ncurses-devel
            - git-core
            - lynx
-   
+           - zsh
+
     - name: Apply Midnight Commander settings 
       template:
         src: /custom_config/ini.j2 
         dest: ~/.config/mc/ini
 
-    - name: Install Vim from source:
-        shell: cd .. && git clone git@github.com:vim/vim.git && ./configure --prefix=/usr --with-features=huge --enable-multibyte --with-python-config-dir=/usr/lib/python2.7/config --enable-pythoninterp=yes && cd vim && make install
+    - name: Install Vim from source
+        shell: cd .. && git clone https://github.com/vim/vim.git && ./configure --prefix=/usr --with-features=huge --enable-multibyte --with-python-config-dir=/usr/lib/python2.7/config --enable-pythoninterp=yes && cd vim && make install
 
     - name: Install VimAwesome
         shell: cd .. && git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime && sh ~/.vim_runtime/install_awesome_vimrc.sh
 
+    - name: Change default shell
+        shell: sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
+
+    - name: Install oh-my-zsh
+        shell: sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    - name: Install Powerline fonts
+        shell: cd .. && git clone https://github.com/powerline/fonts.git --depth=1 && cd fonts && ./install.sh && cd .. && rm -rf fonts
 
 
