@@ -1,0 +1,86 @@
+---
+- hosts: localhost
+  become_user: remus
+  # set lists to use later on add or remove as required
+  vars:
+    packages: ['zsh', 'curl', 'git', 'ncurses-devel', 'git-core']
+  
+  tasks:
+    # Install packages required for the following installations
+    - name: install required packages
+      yum:
+        name: "{{ packages }}"
+        state: present
+    # downloading and install latest version of vim (version 8.1.1824 as of 07/08/2019)
+    - name: download vim source code
+      git:
+        repo: https://github.com/vim/vim.git
+        dest: ~/vim
+    - name: configure, make and install vim
+      shell: ./configure --prefix=/usr --with-features=huge --enable-multibyte --with-python-config-dir=/usr/lib/python2.7/config --enable-pythoninterp=yes
+      args:
+        chdir: ~/vim/
+    - name: make and install vim
+      shell: |
+        sudo make -j4
+        sudo make install
+      args:
+        chdir: ~/vim/
+    # quick check to make sure vimrc doesnt exist already, if it does then skip it 
+    - name: Check if vim_runtime folder exists for awesome vimrc
+      stat:
+        path: ~/.vim_runtime
+      register: awesome_vimrc
+    # Download and install awesome vimrc
+    - name: download awesome vimrc
+      git:
+        repo: https://github.com/amix/vimrc.git
+        dest: ~/.vim_runtime
+        depth: 1
+      when: not awesome_vimrc.stat.exists
+    - name: make ultimate vimrc executable
+      file:
+        path: ~/.vim_runtime/install_awesome_vimrc.sh
+        mode: '0755'
+    - name: install awesome vimrc
+      command: ~/.vim_runtime/install_awesome_vimrc.sh
+      
+    # Download and install oh-my-zsh and install plugins
+    - name: install curl oh-my-zsh
+      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+      args:
+        chdir: ~/
+      ignore_errors: yes
+    - name: install zsh plugins
+      git:
+        repo: "https://github.com/{{ item.src }}"
+        dest: "~/.oh-my-zsh/custom/plugins/{{ item.dest }}"
+        depth: 1
+      loop:
+        - { src: 'zsh-users/zsh-syntax-highlighting.git', dest: 'zsh-syntax-highlighting' }
+        - { src: 'zsh-users/zsh-completions', dest: 'zsh-completions' }
+        - { src: 'zsh-users/zsh-history-substring-search', dest: 'zsh-history-substring-search' }
+        - { src: 'supercrabtree/k', dest: 'k' }
+        - { src: 'wfxr/forgit.git', dest: 'forgit' }
+      ignore_errors: yes
+    
+    # Create repo folder in home directory and download repos to that folder
+    - name: Create a repo folder
+      file:
+        path: ~/repos
+        state: directory
+        mode: '0755'
+        
+    # Download and install fzf (required for forgit zsh plugin)
+    - name: download fzf
+      git:
+        repo: "https://github.com/junegunn/fzf.git"
+        dest: "~/.fzf"
+        depth: 1
+    - name: install fzxf
+      shell: ~/.fzf/install
+
+    - name: mc-settings 
+      template:
+       src: ~/deployment/tools_of_the_trade/custom_config/ini.j2 
+       dest: ~/.config/mc/ini
