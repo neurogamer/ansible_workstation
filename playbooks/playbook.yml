@@ -3,7 +3,7 @@
   become_user: remus
   # set lists to use later on add or remove as required
   vars:
-    packages: ['zsh', 'curl', 'git', 'ncurses-devel', 'git-core']
+    packages: ['zsh', 'curl', 'git']
   
   tasks:
     # Install packages required for the following installations
