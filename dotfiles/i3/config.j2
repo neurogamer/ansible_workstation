@@ -33,7 +33,7 @@ font pango:Clear Sans 10
 ########## Autolaunch ##########
 exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib64/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startuo-id variety
+exec --no-startup-id variety
 exec --no-startup-id compton --config ~/.config/.compton.conf
 ########## Keybindings ##########
 bindsym Mod4+Shift+s exec i3lock # Easier locking
@@ -66,11 +66,11 @@ bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle-mu
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+Return exec tilix
-bindsym Mod4+m exec cmus
+bindsym Mod4+Return exec terminator
+bindsym Mod4+m exec terminator -e "cmus"
 bindsym Mod4+b exec firefox
-bindsym Mod4+o exec tilix -e "ranger"
-bindsym Mod4+p exec tilix -e "mc"
+bindsym Mod4+o exec terminator -e "ranger"
+bindsym Mod4+p exec terminator -e "mc"
 
 # kill focused window
 bindsym Mod4+Shift+q kill

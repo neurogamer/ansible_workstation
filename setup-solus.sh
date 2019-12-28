@@ -59,10 +59,11 @@ sudo eopkg install -y\
   compton\
   feh\
   cmus\
+  deadbeef\
+  nicotine-plus\
 
 #### Add user to groups
 for group in docker input fuse ; do
   sudo gpasswd -a $USER $group
 done
-
-echo "You should probably reboot"
+h
