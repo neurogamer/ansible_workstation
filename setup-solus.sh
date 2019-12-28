@@ -60,6 +60,7 @@ sudo eopkg install -y\
   feh\
   cmus\
   deadbeef\
+  lutris\
 
 #### Add user to groups
 for group in docker input fuse ; do

@@ -109,8 +109,9 @@
        src: ~/git/tools_of_the_trade/dotfiles/zshrc.j2
        dest: ~/.zshrc
     - name: variety
-      template: ~/git/tools_of_the_trade/dotfiles/variety.j2
-       src: ~/.config/variety/scripts/set_wallpaper
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/variety.j2
+       dest: ~/.config/variety/scripts/set_wallpaper
     #Installing Snaps
     - name: Install VS Code
       snap:
