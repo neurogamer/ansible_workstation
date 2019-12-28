@@ -56,6 +56,9 @@ sudo eopkg install -y\
   mpd\
   wine\
   neofetch\
+  compton\
+  feh\
+  cmus\
 
 #### Add user to groups
 for group in docker input fuse ; do
