@@ -23,6 +23,8 @@ sudo eopkg remove -y\
   rhythmbox\
   thunderbird\
 
+sudo eopkg up
+
 # Install packages from standard repo
 sudo eopkg install -y\
   zsh\
