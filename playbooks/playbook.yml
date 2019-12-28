@@ -1,31 +1,12 @@
 ---
 - hosts: localhost
   become_user: remus
-  # set lists to use later on add or remove as required
-  vars:
-    packages: ['zsh', 'curl', 'git']
-  
+  become: yes
+
   tasks:
-    # Install packages required for the following installations
-    - name: install required packages
-      yum:
-        name: "{{ packages }}"
-        state: present
-    # downloading and install latest version of vim (version 8.1.1824 as of 07/08/2019)
-    - name: download vim source code
-      git:
-        repo: https://github.com/vim/vim.git
-        dest: ~/vim
-    - name: configure, make and install vim
-      shell: ./configure --prefix=/usr --with-features=huge --enable-multibyte --with-python-config-dir=/usr/lib/python2.7/config --enable-pythoninterp=yes
-      args:
-        chdir: ~/vim/
-    - name: make and install vim
-      shell: |
-        sudo make -j4
-        sudo make install
-      args:
-        chdir: ~/vim/
+    - name: Setup Solus script
+      script: ~/git/tools_of_the_trade/setup-solus.sh
+   
     # quick check to make sure vimrc doesnt exist already, if it does then skip it 
     - name: Check if vim_runtime folder exists for awesome vimrc
       stat:
@@ -51,6 +32,7 @@
       args:
         chdir: ~/
       ignore_errors: yes
+
     - name: install zsh plugins
       git:
         repo: "https://github.com/{{ item.src }}"
@@ -62,15 +44,7 @@
         - { src: 'zsh-users/zsh-history-substring-search', dest: 'zsh-history-substring-search' }
         - { src: 'supercrabtree/k', dest: 'k' }
         - { src: 'wfxr/forgit.git', dest: 'forgit' }
-      ignore_errors: yes
-    
-    # Create repo folder in home directory and download repos to that folder
-    - name: Create a repo folder
-      file:
-        path: ~/repos
-        state: directory
-        mode: '0755'
-        
+      ignore_errors: yes        
     # Download and install fzf (required for forgit zsh plugin)
     - name: download fzf
       git:
@@ -80,7 +54,70 @@
     - name: install fzxf
       shell: ~/.fzf/install
 
+    - name: Creates mc config directory
+      file:
+        path: ~/.config/mc
+        state: directory
+
+    - name: Creates i3 config directory
+      file:
+        path: ~/.config/i3
+        state: directory
+
     - name: mc-settings 
       template:
-       src: ~/deployment/tools_of_the_trade/custom_config/ini.j2 
+       src: ~/git/tools_of_the_trade/dotfiles/ini.j2 
        dest: ~/.config/mc/ini
+    # Copy AppImages
+    - name: Create an appimages folder
+      file:
+        path: ~/appimages
+        state: directory
+        mode: '0755' 
+    - name: Copy FreeTube
+      copy:
+        src: ~/git/tools_of_the_trade/appimages/freetube.AppImage
+        dest: ~/appimages/freetube.AppImage
+        mode: u+rwx,g-wx,o-rx
+    - name: Copy OpenRA 
+      copy:
+        src: ~/git/tools_of_the_trade/appimages/openra.AppImage
+        dest: ~/appimages/openra.AppImage
+        mode: u+rwx,g-wx,o-rx
+    - name: Copy pCloud
+      copy:
+        src: ~/git/tools_of_the_trade/appimages/pcloud.AppImage
+        dest: ~/appimages/pcloud.AppImages
+        mode: u+rwx,g-wx,o-rx     
+    # Copy configs and dotfiles
+    - name: vimrc 
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/vimrc.j2 
+       dest: ~/.vimrc
+
+    - name: i3-config 
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/i3/config.j2 
+       dest: ~/.config/i3/config
+  
+    - name: compton-config
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/i3/compton.j2 
+       dest: ~/.config/.compton.conf
+    - name: zshrc
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/zshrc.j2
+       dest: ~/.zshrc
+    #Installing Snaps
+    - name: Install VS Code
+      snap:
+        name: code
+        classic: yes
+      become_user: root
+
+    - name: Install snaps
+      snap:
+        name:
+          - cataclysm
+          - cnctsun
+      become_user: root
