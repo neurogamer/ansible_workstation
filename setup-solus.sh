@@ -55,6 +55,7 @@ sudo eopkg install -y\
   vlc\
   mpd\
   wine\
+  neofetch\
 
 #### Add user to groups
 for group in docker input fuse ; do
