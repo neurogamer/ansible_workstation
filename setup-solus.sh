@@ -23,8 +23,6 @@ sudo eopkg remove -y\
   rhythmbox\
   thunderbird\
 
-sudo eopkg up
-
 # Install packages from standard repo
 sudo eopkg install -y\
   zsh\
@@ -62,10 +60,8 @@ sudo eopkg install -y\
   feh\
   cmus\
   deadbeef\
-  nicotine-plus\
 
 #### Add user to groups
 for group in docker input fuse ; do
   sudo gpasswd -a $USER $group
 done
-h

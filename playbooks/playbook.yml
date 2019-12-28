@@ -104,10 +104,13 @@
       template:
        src: ~/git/tools_of_the_trade/dotfiles/i3/compton.j2 
        dest: ~/.config/.compton.conf
-    - name: zshrc
+    - name: zshrc-config
       template:
        src: ~/git/tools_of_the_trade/dotfiles/zshrc.j2
        dest: ~/.zshrc
+    - name: variety
+      template: ~/git/tools_of_the_trade/dotfiles/variety.j2
+       src: ~/.config/variety/scripts/set_wallpaper
     #Installing Snaps
     - name: Install VS Code
       snap:
