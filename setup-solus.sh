@@ -30,7 +30,7 @@ sudo eopkg install -y\
   audacity\
   vim\
   curl\
-  tilix\
+  terminator\
   mc\
   ranger\
   docker{,-compose,-machine}\
