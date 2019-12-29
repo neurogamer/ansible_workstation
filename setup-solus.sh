@@ -33,22 +33,13 @@ sudo eopkg install -y\
   terminator\
   mc\
   ranger\
-  docker{,-compose,-machine}\
   i3\
   brave\
   htop\
   variety\
-  intel-microcode\
   iotop\
   keepass\
-  libinput\
-  man-pages\
-  pidgin{,-otr,-sipe}\
   powertop\
-  purple-{hangouts,facebook}\
-  rawtherapee\
-  rsync\
-  ruby\
   sshfs-fuse\
   steam\
   tlp\
@@ -61,6 +52,7 @@ sudo eopkg install -y\
   cmus\
   deadbeef\
   lutris\
+  docker\
 
 #### Add user to groups
 for group in docker input fuse ; do
