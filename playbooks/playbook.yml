@@ -58,12 +58,14 @@
       file:
         path: ~/.config/mc
         state: directory
-
     - name: Creates i3 config directory
       file:
         path: ~/.config/i3
         state: directory
-
+    - name: create variety scripts folder
+      file:
+        path: ~/.config/variety/scripts
+        state: directory
     - name: mc-settings 
       template:
        src: ~/git/tools_of_the_trade/dotfiles/ini.j2 
