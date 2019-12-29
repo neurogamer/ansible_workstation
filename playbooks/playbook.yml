@@ -118,10 +118,12 @@
         name: code
         classic: yes
       become_user: root
-
     - name: Install snaps
       snap:
         name:
           - cataclysm
           - cnctsun
       become_user: root
+    # Adding ZSH to default
+    - name: change default shell
+      shell: sudo chsh -s /bin/zsh $(whoami)
