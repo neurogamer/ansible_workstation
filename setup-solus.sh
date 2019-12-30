@@ -53,6 +53,7 @@ sudo eopkg install -y\
   deadbeef\
   lutris\
   docker\
+  lxappearance\
 
 #### Add user to groups
 for group in docker fuse ; do
