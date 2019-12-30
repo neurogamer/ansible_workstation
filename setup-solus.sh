@@ -55,6 +55,6 @@ sudo eopkg install -y\
   docker\
 
 #### Add user to groups
-for group in docker input fuse ; do
+for group in docker fuse ; do
   sudo gpasswd -a $USER $group
 done
