@@ -67,10 +67,10 @@ floating_modifier Mod4
 
 # start a terminal
 bindsym Mod4+Return exec terminator
-bindsym Mod4+m exec cmus
+bindsym Mod4+m exec terminator -e "cmus"
 bindsym Mod4+b exec firefox
-bindsym Mod4+o exec ranger
-bindsym Mod4+p exec mc
+bindsym Mod4+o exec terminator -e "ranger"
+bindsym Mod4+p exec terminator -e "mc"
 bindsym Mod4+Shift+g exec steam
 bindsym Mod4+Shift+t exec nautilus
 bindsym Mod4+Escape exec gnome-system-monitor
@@ -253,3 +253,4 @@ client.unfocused #073642 #073642 #93a1a1 #586e75
 client.urgent #d33682 #d33682 #fdf6e3 #dc322f
 
 assign [class="kdenlive"] $ws5
+assign [class="steam"] $ws6
