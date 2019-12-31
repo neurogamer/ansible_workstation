@@ -54,6 +54,9 @@ sudo eopkg install -y\
   lutris\
   docker\
   lxappearance\
+  i3-style\
+  conky\
+  gimp\
 
 #### Add user to groups
 for group in docker fuse ; do

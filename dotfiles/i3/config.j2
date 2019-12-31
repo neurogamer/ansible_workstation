@@ -22,7 +22,7 @@
 # Variable setting
 set $defaultmod Mod4
 set $up i
-set $down k
+#set $down k
 set $left j
 set $right l
 
@@ -67,12 +67,16 @@ floating_modifier Mod4
 
 # start a terminal
 bindsym Mod4+Return exec terminator
-bindsym Mod4+m exec terminator -e "cmus"
+bindsym Mod4+m exec cmus
 bindsym Mod4+b exec firefox
-bindsym Mod4+o exec terminator -e "ranger"
-bindsym Mod4+p exec terminator -e "mc"
+bindsym Mod4+o exec ranger
+bindsym Mod4+p exec mc
 bindsym Mod4+Shift+g exec steam
 bindsym Mod4+Shift+t exec nautilus
+bindsym Mod4+Escape exec gnome-system-monitor
+bindsym Mod4+c exec code
+bindsym Mod4+k exec kdenlive
+bindsym Mod4+Shift+k exec kolourpaint
 
 # kill focused window
 bindsym Mod4+Shift+q kill
@@ -142,9 +146,9 @@ set $ws3 "wrk"
 set $ws4 "mus"
 set $ws5 "vid"
 set $ws6 "gms"
-set $ws7 "cnf"
-set $ws8 "stf"
-set $ws9 "rnd"
+set $ws7 "code"
+set $ws8 "cnf"
+set $ws9 "fls"
 set $ws10 "jnk"
 
 
@@ -247,3 +251,5 @@ client.focused #859900 #859900 #fdf6e3 #6c71c4
 client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75
 client.urgent #d33682 #d33682 #fdf6e3 #dc322f
+
+assign [class="kdenlive"] $ws5
