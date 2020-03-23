@@ -46,6 +46,8 @@ sudo eopkg install -y\
   vlc\
   mpd\
   wine\
+  wine-32bit\
+  vulkan\
   neofetch\
   compton\
   feh\
@@ -57,6 +59,9 @@ sudo eopkg install -y\
   i3-style\
   conky\
   gimp\
+  openra\
+  pptp\
+  w3m\
 
 #### Add user to groups
 for group in docker fuse ; do
