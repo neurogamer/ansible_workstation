@@ -25,31 +25,21 @@ sudo eopkg remove -y\
 
 # Install packages from standard repo
 sudo eopkg install -y\
-  zsh\
   lynx\
-  audacity\
-  vim\
-  curl\
+  vim
   terminator\
   mc\
   ranger\
   i3\
-  brave\
   htop\
   variety\
-  iotop\
-  keepass\
-  powertop\
   sshfs-fuse\
   steam\
-  tlp\
-  vlc\
   mpd\
   wine\
   wine-32bit\
   vulkan\
   neofetch\
-  compton\
   feh\
   cmus\
   deadbeef\
@@ -58,10 +48,9 @@ sudo eopkg install -y\
   lxappearance\
   i3-style\
   conky\
-  gimp\
   openra\
   pptp\
-  w3m\
+  w3m
 
 #### Add user to groups
 for group in docker fuse ; do
