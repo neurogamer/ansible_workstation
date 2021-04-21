@@ -34,7 +34,7 @@ font pango:Clear Sans 10
 exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib64/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id variety
-exec --no-startup-id compton --config ~/.config/.compton.conf
+exec --no-startup-id picom --config ~/.config/picom.conf
 ########## Keybindings ##########
 bindsym Mod4+Shift+s exec i3lock # Easier locking
 
@@ -74,7 +74,7 @@ bindsym Mod4+p exec terminator -e "mc"
 bindsym Mod4+Shift+g exec steam
 bindsym Mod4+Shift+t exec nautilus
 bindsym Mod4+Escape exec gnome-system-monitor
-bindsym Mod4+c exec code
+bindsym Mod4+c exec vscode
 bindsym Mod4+Shift+k exec kdenlive
 bindsym Mod4+Shift+u exec lutris
 

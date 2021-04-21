@@ -45,7 +45,9 @@
         - { src: 'supercrabtree/k', dest: 'k' }
         - { src: 'wfxr/forgit.git', dest: 'forgit' }
       ignore_errors: yes        
-    # Download and install fzf (required for forgit zsh plugin)
+   
+        # Download and install fzf (required for forgit zsh plugin)
+   
     - name: download fzf
       git:
         repo: "https://github.com/junegunn/fzf.git"
@@ -53,24 +55,31 @@
         depth: 1
     - name: install fzxf
       shell: ~/.fzf/install
+   
+        # Create config folders
 
     - name: Creates mc config directory
       file:
         path: ~/.config/mc
         state: directory
+
+    - name: Creates terminator config directory
+      file:
+        path: ~/.config/terminator
+        state: directory
+
     - name: Creates i3 config directory
       file:
         path: ~/.config/i3
         state: directory
+   
     - name: create variety scripts folder
       file:
         path: ~/.config/variety/scripts
         state: directory
-    - name: mc-settings 
-      template:
-       src: ~/git/tools_of_the_trade/dotfiles/ini.j2 
-       dest: ~/.config/mc/ini
-    # Copy AppImages
+   
+        # Copy AppImages
+
     - name: Create an appimages folder
       file:
         path: ~/appimages
@@ -82,38 +91,47 @@
         src: ~/git/tools_of_the_trade/appimages/pcloud.AppImage
         dest: ~/appimages/pcloud.AppImages
         mode: u+rwx,g-wx,o-rx     
-    # Copy configs and dotfiles
+   
+        # Copy configs and dotfiles
+
     - name: vimrc 
       template:
        src: ~/git/tools_of_the_trade/dotfiles/vimrc.j2 
        dest: ~/.vimrc
 
+    - name: mc-settings 
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/ini.j2 
+       dest: ~/.config/mc/ini
+
+
     - name: i3-config 
       template:
        src: ~/git/tools_of_the_trade/dotfiles/i3/config.j2 
        dest: ~/.config/i3/config
-  
-    - name: compton-config
+ 
+    - name: terminator config 
       template:
-       src: ~/git/tools_of_the_trade/dotfiles/i3/compton.j2 
-       dest: ~/.config/.compton.conf
+       src: ~/git/tools_of_the_trade/dotfiles/terminator.j2 
+       dest: ~/.config/terminator/config
+
+    - name: picom-config
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/i3/picom.j2 
+       dest: ~/.config/picom.conf
+   
     - name: zshrc-config
       template:
        src: ~/git/tools_of_the_trade/dotfiles/zshrc.j2
        dest: ~/.zshrc
+    
     - name: variety
       template:
        src: ~/git/tools_of_the_trade/dotfiles/variety.j2
        dest: ~/.config/variety/scripts/set_wallpaper
 
-    # Installing Snaps
-    - name: Install VS Code
-      snap:
-        name: code
-        classic: yes
-      become_user: root
-
     # Adding ZSH to default
+   
     - name: change default shell
       shell: sudo chsh -s /bin/zsh $(whoami)
 

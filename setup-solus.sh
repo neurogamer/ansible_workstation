@@ -26,14 +26,13 @@ sudo eopkg remove -y\
 # Install packages from standard repo
 sudo eopkg install -y\
   lynx\
-  vim
+  vim\
   terminator\
   mc\
   ranger\
   i3\
   htop\
   variety\
-  sshfs-fuse\
   steam\
   mpd\
   wine\
@@ -47,10 +46,21 @@ sudo eopkg install -y\
   docker\
   lxappearance\
   i3-style\
-  conky\
-  openra\
   pptp\
-  w3m
+  picom\
+  w3m\
+  xkill\
+  brave\
+  vivaldi-stable\
+  vlc\
+  mpv\
+  jq\
+  kdenlive\
+  atom\
+  rofi\
+  openssh-server
+
+sudo npm install -g peerflix
 
 #### Add user to groups
 for group in docker fuse ; do
