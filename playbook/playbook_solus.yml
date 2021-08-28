@@ -4,8 +4,8 @@
   become: yes
 
   tasks:
-    - name: Setup Solus script
-      script: ~/git/tools_of_the_trade/setup-solus.sh
+    #- name: Setup Solus script
+   #   script: ~/git/tools_of_the_trade/setup-solus.sh
    
     # quick check to make sure vimrc doesnt exist already, if it does then skip it 
     - name: Check if vim_runtime folder exists for awesome vimrc
