@@ -27,6 +27,7 @@
         - neofetch
         - mpd
         - mpv
+        - fonts-powerline
     
     - name: Check if vim_runtime folder exists for awesome vimrc
       stat:
