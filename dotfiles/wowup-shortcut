@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=WoWUp
+Comment=WoWUp addon manager
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=wow;warcraft;addons
+OnlyShowIn=GNOME;Unity;
+Exec=~/git/tools_of_the_trade/appimages/wowup.AppImages %u
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=org.gnome.Yelp
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Core;

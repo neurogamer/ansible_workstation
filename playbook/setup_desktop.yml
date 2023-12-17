@@ -26,6 +26,9 @@
         - mpd
         - mpv
         - fonts-powerline
+     
+    - name: Battle.net dependencies   
+      shell: dpkg --add-architecture i386 && apt update && apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386
     
     - name: Check if vim_runtime folder exists for awesome vimrc
       stat:
@@ -77,7 +80,22 @@
         depth: 1
     - name: install fzxf
       shell: ~/.fzf/install
-   
+      
+         # Copy AppImages
+
+    - name: Create an appimages folder
+      file:
+        path: ~/appimages
+        state: directory
+        mode: '0755' 
+        mode: u+rwx,g-wx,o-rx
+        
+    - name: Copy pCloud
+      copy:
+        src: ~/git/tools_of_the_trade/appimages/pcloud.AppImage
+        dest: ~/appimages/pcloud.AppImages
+        mode: u+rwx,g-wx,o-rx  
+        
         # Create config folders
 
     - name: Creates mc config directory
@@ -112,6 +130,10 @@
        src: ~/git/tools_of_the_trade/dotfiles/mc-ini
        dest: ~/.config/mc/ini
 
+    - name: wowup shortcut
+      template:
+       src: ~/git/tools_of_the_trade/dotfiles/wowup-shortcut
+       dest: /usr/share/applications/wowup.desktop
 
     - name: i3-config 
       template:
