@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-  become_user: remus
   become: yes
 
   tasks:
@@ -32,13 +31,16 @@
       stat:
         path: ~/.vim_runtime
       register: awesome_vimrc
+      
     # Download and install awesome vimrc
+    
     - name: download awesome vimrc
       git:
         repo: https://github.com/amix/vimrc.git
         dest: ~/.vim_runtime
         depth: 1
       when: not awesome_vimrc.stat.exists
+      
     - name: make ultimate vimrc executable
       file:
         path: ~/.vim_runtime/install_awesome_vimrc.sh
@@ -133,10 +135,10 @@
        
     # Install peerflix
     - name: Install peerflix
-      shell: sudo npm install -g peerflix
+      shell: npm install -g peerflix
 
     # Adding ZSH to default
    
     - name: change default shell
-      shell: sudo chsh -s /bin/zsh $(whoami)
+      shell: chsh -s /bin/zsh 
 
