@@ -81,22 +81,6 @@
     - name: install fzxf
       shell: ~/.fzf/install
       
-         # Copy AppImages
-
-    - name: Create an appimages folder
-      file:
-        path: ~/appimages
-        state: directory
-        mode: '0755' 
-        mode: u+rwx,g-wx,o-rx
-        
-    - name: Copy pCloud
-      copy:
-        src: ~/git/tools_of_the_trade/appimages/pcloud.AppImage
-        dest: ~/appimages/pcloud.AppImages
-        mode: u+rwx,g-wx,o-rx  
-        
-        # Create config folders
 
     - name: Creates mc config directory
       file:
